@@ -1,15 +1,13 @@
 version: '3'
+# Used in Azure
 services:
 # Basic Servers
   postgres:
     image: 'postgres:latest'
   redis:
     image: 'redis:latest'
-  router: #nginx
-    restart: always
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./nginx
+  router:
+    image: 'glmsharp/complex-nginx'
     ports:
       - '8080:80'
 
@@ -17,12 +15,7 @@ services:
   api:
     depends_on:
       - postgres
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./server
-    volumes:
-      - /app/node_modules
-      - ./server:/app
+    image: 'glmsharp/complex-server'
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -33,12 +26,7 @@ services:
       - PGPORT=5432
 
   worker:
-    build: 
-      dockerfile: Dockerfile.dev
-      context: ./worker
-    volumes:
-      - /app/node_modules
-      - ./worker:/app
+    image: 'glmsharp/complex-worker'
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379   
@@ -47,10 +35,5 @@ services:
     depends_on:
       - api
       - redis
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./client
-    volumes:
-      - /app/node_modules
-      - ./client:/app
+    image: 'glmsharp/complex-client'
 
