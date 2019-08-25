@@ -17,7 +17,7 @@ spec:
           image: glmsharp/complex-server
           ports:
             - containerPort: 5000
-        # Environment configurations variables
+          # Environment configurations variables
           env:
             - name: REDIS_HOST
               value: redis-cluster-ip-service
@@ -30,4 +30,10 @@ spec:
             - name: PGPOST
               value: '5432'
             - name: PGDATABASE
-              value: postgress
+              value: postgres
+            # This one is a dynamic value into the memory, keep that in mind.
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD
