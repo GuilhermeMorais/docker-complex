@@ -5,6 +5,12 @@
 		}
 	],
 	"settings": {
-		"workbench.colorTheme": "PowerShell ISE"
+		"workbench.colorTheme": "Monokai",
+		"material-icon-theme.files.associations": {
+			"*.dev": "dockerfile"
+		}
+	},
+	"extensions": {
+		"recommendations": []
 	}
 }
