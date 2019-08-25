@@ -4,6 +4,8 @@
         "PGHOST",
         "PGPASSWORD",
         "PGPORT",
-        "PGUSER"
+        "PGPOST",
+        "PGUSER",
+        "postgresql"
     ]
 }
