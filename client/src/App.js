@@ -11,14 +11,14 @@ function App() {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className='App-title'> Welcome to React</h1>
-          <Link to='/'>Home</Link><br/>
+          <h1 className='App-title'> Fib Calculator</h1>
+          <Link to='/'>Home</Link><br />
           <Link to='/otherPage'>Other Page</Link>
         </header>
-      </div>
-      <div>
-        <Route exact path='/' component={Fib} />
-        <Route path='/otherPage' component={OtherPage} />
+        <div>
+          <Route exact path='/' component={Fib} />
+          <Route path='/otherPage' component={OtherPage} />
+        </div>
       </div>
     </Router>
   );
