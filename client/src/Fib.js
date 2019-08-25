@@ -15,7 +15,8 @@ class Fib extends Component {
 
     async fetchValues() {
         var values = await axios.get('/api/values/current');
-        if (values.data.indexOf('html') >= 0 ){
+        var planeValue = values.data + "";
+        if (planeValue.indexOf('html') >= 0 ){
             values = { data: ["offline"] };
         }
         this.setState({ values: values.data });
@@ -28,7 +29,8 @@ class Fib extends Component {
         } catch (error) {
             console.log(error);
         }
-        if (!seemIndexes.data.indexOf('html') >= 0){
+        var planeValue = seemIndexes.data + "";
+        if (planeValue.indexOf('html') >= 0){
             seemIndexes = { data: [
                 {
                     number: "offline"
@@ -60,7 +62,7 @@ class Fib extends Component {
 
     renderValues() {
         const entries = [];
-
+        // eslint-disable-next-line
         for (let key in this.state.values) {
             entries.push(
                 <div key={key}>
