@@ -10,15 +10,15 @@ script:
   - docker run -e CI=true glmsharp/docker-client-test npm run test
 
 after_success:
-  - docker build -t glmsharp/complex-worker ./worker
-  - docker build -t glmsharp/complex-server ./server
-  - docker build -t glmsharp/complex-client ./client
-  - docker build -t glmsharp/complex-nginx  ./nginx
+  - docker build -t glmsharp/complex-worker:$TRAVIS_BRANCH ./worker
+  - docker build -t glmsharp/complex-server:$TRAVIS_BRANCH ./server
+  - docker build -t glmsharp/complex-client:$TRAVIS_BRANCH ./client
+  - docker build -t glmsharp/complex-nginx:$TRAVIS_BRANCH  ./nginx
   # Images were build now we need to send to the hub.
   # log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push images to docker hub.
-  - docker push glmsharp/complex-worker
-  - docker push glmsharp/complex-server
-  - docker push glmsharp/complex-client
-  - docker push glmsharp/complex-nginx 
+  - docker push glmsharp/complex-worker:$TRAVIS_BRANCH
+  - docker push glmsharp/complex-server:$TRAVIS_BRANCH
+  - docker push glmsharp/complex-client:$TRAVIS_BRANCH
+  - docker push glmsharp/complex-nginx:$TRAVIS_BRANCH
